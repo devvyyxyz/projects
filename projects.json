@@ -7,6 +7,14 @@
     {
       "name": "Simple API",
       "url": "https://github.com/devvyyxyz/Simple-api"
+    },
+    {
+      "name": "Discord bot animated avatar",
+      "url": "https://github.com/devvyyxyz/Discord-bot-animated-avatar"
+    },
+    {
+      "name": "Random gen Discord bot",
+      "url": "https://github.com/devvyyxyz/random-gen-discord-bot"
     }
   ],
   "tool": [
@@ -17,6 +25,10 @@
     {
       "name": "VHS video/image creator",
       "url": "https://github.com/devvyyxyz/VHS-video-and-image-creator"
+    },
+    {
+      "name": "images & audio converter with python",
+      "url": "https://github.com/devvyyxyz/images-and-audio-converter-with-python"
     }
   ],
   "template": [
@@ -49,6 +61,14 @@
     {
       "name": "fake terminal",
       "url": "https://github.com/devvyyxyz/fake-terminal"
+    },
+    {
+      "name": "childrens math learning program",
+      "url": "https://github.com/devvyyxyz/childrens-math-learning-program"
+    },
+    {
+      "name": "interactive fake terminal",
+      "url": "https://github.com/devvyyxyz/interactive-fake-terminal"
     }
   ]
 }

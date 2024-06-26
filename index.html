@@ -1,16 +1,33 @@
 <!DOCTYPE html>
-<html>
-
+<html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width">
-  <title>replit</title>
-  <link href="style.css" rel="stylesheet" type="text/css" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GitHub Projects</title>
+  <link rel="stylesheet" href="styles.css">
 </head>
-
 <body>
-  Hello world
-  <script src="script.js"></script>
-</body>
+  <div class="container">
+    <h1>GitHub Projects</h1>
 
+    <div class="converter">
+      <div class="dropdown">
+        <select id="category">
+          <option value="all">All Categories</option>
+          <option value="utility">Utility</option>
+          <option value="conversion">Conversion</option>
+        </select>
+        <button id="filterBtn">Filter</button>
+      </div>
+
+      <div id="projectList">
+        <!-- Project cards will be dynamically added here -->
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // JavaScript for fetching and displaying GitHub
+  </script>
+</body>
 </html>

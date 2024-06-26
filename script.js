@@ -19,10 +19,21 @@ document.addEventListener('DOMContentLoaded', function() {
         throw new Error('Failed to fetch projects');
       }
       projects = await response.json();
+      populateCategoryDropdown(); // Populate category dropdown after fetching projects
       updateProjects(); // Update projects immediately on load
     } catch (error) {
       console.error('Error fetching projects:', error);
     }
+  }
+
+  // Function to populate category dropdown with options
+  function populateCategoryDropdown() {
+    Object.keys(projects).forEach(category => {
+      const option = document.createElement('option');
+      option.value = category;
+      option.textContent = category.charAt(0).toUpperCase() + category.slice(1); // Capitalize first letter
+      categorySelect.appendChild(option);
+    });
   }
 
   // Function to update projects based on current category and page

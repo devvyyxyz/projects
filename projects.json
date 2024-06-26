@@ -23,12 +23,32 @@
     {
       "name": "Windows 98 Site",
       "url": "https://github.com/devvyyxyz/windows-98-site"
+    },
+    {
+      "name": "100 python games",
+      "url": "https://github.com/devvyyxyz/100-python-games"
+    },
+    {
+      "name": "repository template",
+      "url": "https://github.com/devvyyxyz/repository-template"
     }
   ],
-  "test": [
+  "game": [
     {
       "name": "Terminal Text Story Game",
       "url": "https://github.com/devvyyxyz/Terminal-text-story-game"
+    }
+  ],
+  "fun": [
+    {
+      "name": "Google thats actualy Bing",
+      "url": "https://github.com/devvyyxyz/Google-thats-actualy-bing"
+    }
+  ],
+  "misc": [
+    {
+      "name": "fake terminal",
+      "url": "https://github.com/devvyyxyz/fake-terminal"
     }
   ]
 }

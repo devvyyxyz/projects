@@ -18,18 +18,31 @@
           <option value="tool">Tool</option>
           <option value="template">Template</option>
           <option value="test">Test</option>
+          <!-- Add more categories as needed -->
         </select>
+
+        <select id="itemsPerPage">
+          <option value="5">5 per page</option>
+          <option value="10" selected>10 per page</option>
+          <option value="15">15 per page</option>
+          <!-- Add more options as needed -->
+        </select>
+
         <button id="filterBtn">Filter</button>
       </div>
 
       <div id="projectList">
         <!-- Project cards will be dynamically added here -->
       </div>
+
+      <div class="pagination">
+        <button id="prevPage">Previous</button>
+        <span>Page <span id="currentPage">1</span> of <span id="totalPages">1</span></span>
+        <button id="nextPage">Next</button>
+      </div>
     </div>
   </div>
+
   <script src="script.js"></script>
-  <script>
-    // JavaScript for fetching and displaying GitHub
-  </script>
 </body>
 </html>

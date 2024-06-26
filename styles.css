@@ -6,6 +6,7 @@ body {
   align-items: center;
   height: 100vh;
   margin: 0;
+  overflow: hidden; /* Prevent body overflow */
 }
 
 .container {
@@ -13,8 +14,11 @@ body {
   padding: 20px;
   border-radius: 8px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  width: 600px;
+  width: 90%; /* Adjusted for mobile */
+  max-width: 600px; /* Ensures it doesn't get too wide on larger screens */
   text-align: center;
+  max-height: 90vh; /* Set maximum height */
+  overflow-y: auto; /* Make container scrollable */
 }
 
 h1 {
@@ -28,15 +32,14 @@ h1 {
 
 .dropdown {
   display: flex;
-  align-items: center;
-  justify-content: space-between;
+  flex-direction: column; /* Changed for mobile */
   margin-bottom: 10px;
 }
 
 select {
   flex: 1;
   padding: 10px;
-  margin-right: 10px;
+  margin-bottom: 10px; /* Changed for mobile */
   border: 1px solid #ccc;
   border-radius: 4px;
 }
@@ -62,7 +65,8 @@ button:hover {
   border-radius: 4px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   display: flex;
-  justify-content: space-between;
+  flex-direction: column; /* Changed for mobile */
+  align-items: flex-start; /* Changed for mobile */
 }
 
 .project-card h3 {
@@ -77,6 +81,7 @@ button:hover {
 }
 
 .project-card a {
+  margin-top: 10px; /* Added for spacing */
   text-decoration: none;
   color: #007BFF;
 }
@@ -84,4 +89,40 @@ button:hover {
 .project-card a:hover {
   text-decoration: underline;
   color: #0056b3;
+}
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.pagination button {
+  margin: 0 5px;
+}
+
+/* Media Query for smaller screens */
+@media (max-width: 600px) {
+  .dropdown {
+    flex-direction: column;
+  }
+
+  select {
+    margin-bottom: 10px;
+    margin-right: 0; /* Reset margin-right for mobile */
+  }
+
+  .project-card {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .pagination {
+    flex-direction: column;
+  }
+
+  .pagination button {
+    margin: 5px 0;
+  }
 }

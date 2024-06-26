@@ -71,20 +71,20 @@ document.addEventListener('DOMContentLoaded', function() {
     paginatedProjects.forEach(project => {
       const card = document.createElement('div');
       card.classList.add('project-card');
-
       card.innerHTML = `
         <div>
           <h3>${project.name}</h3>
           <p>Category: ${categorySelect.value}</p>
         </div>
-        <a href="${project.url}" target="_blank">View on GitHub</a>
-        <button class="view-files-btn" data-url="${project.url}">View Files</button>
+        <div>
+          <a href="${project.url}" target="_blank">View on GitHub</a>
+          <a href="files.html?repo=${encodeURIComponent(project.url)}" class="view-files">View Files</a>
+        </div>
       `;
       projectList.appendChild(card);
     });
 
     updatePaginationInfo(projectsData.length);
-    addViewFilesEventListeners();
   }
 
   // Function to update pagination information (current page, total pages)
@@ -130,17 +130,6 @@ document.addEventListener('DOMContentLoaded', function() {
       updateProjects();
     }
   });
-
-  // Function to add event listeners to "View Files" buttons
-  function addViewFilesEventListeners() {
-    const viewFilesBtns = document.querySelectorAll('.view-files-btn');
-    viewFilesBtns.forEach(btn => {
-      btn.addEventListener('click', () => {
-        const repoUrl = btn.getAttribute('data-url');
-        window.location.href = `files.html?url=${encodeURIComponent(repoUrl)}`;
-      });
-    });
-  }
 
   // Initial fetch of projects when DOM content is loaded
   fetchProjects();

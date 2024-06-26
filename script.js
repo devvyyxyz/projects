@@ -1,10 +1,11 @@
 document.addEventListener('DOMContentLoaded', function() {
   const projectList = document.getElementById('projectList');
   const categorySelect = document.getElementById('category');
-  const filterBtn = document.getElementById('filterBtn');
   const itemsPerPageSelect = document.getElementById('itemsPerPage');
   const currentPageSpan = document.getElementById('currentPage');
   const totalPagesSpan = document.getElementById('totalPages');
+  const prevPageBtn = document.getElementById('prevPage');
+  const nextPageBtn = document.getElementById('nextPage');
 
   let projects = {}; // Object to hold projects data categorized by type
   let currentPage = 1;
@@ -18,23 +19,26 @@ document.addEventListener('DOMContentLoaded', function() {
         throw new Error('Failed to fetch projects');
       }
       projects = await response.json();
-      displayProjects(); // Display projects on initial load
+      updateProjects(); // Update projects immediately on load
     } catch (error) {
       console.error('Error fetching projects:', error);
     }
   }
 
-  // Function to display projects based on current page and category selection
-  function displayProjects() {
+  // Function to update projects based on current category and page
+  function updateProjects() {
     const selectedCategory = categorySelect.value;
-    const startIndex = (currentPage - 1) * itemsPerPage;
-    const endIndex = startIndex + itemsPerPage;
-    const projectsToDisplay = selectedCategory === 'all' ? getAllProjects() : projects[selectedCategory];
+    const projectsToDisplay = getProjectsByCategory(selectedCategory);
+    renderProjects(projectsToDisplay);
+  }
 
-    const paginatedProjects = projectsToDisplay.slice(startIndex, endIndex);
-    renderProjects(paginatedProjects);
-
-    updatePaginationInfo(projectsToDisplay.length);
+  // Function to get projects based on selected category
+  function getProjectsByCategory(category) {
+    if (category === 'all') {
+      return getAllProjects();
+    } else {
+      return projects[category] || [];
+    }
   }
 
   // Function to get all projects from all categories
@@ -48,8 +52,12 @@ document.addEventListener('DOMContentLoaded', function() {
 
   // Function to render project cards
   function renderProjects(projectsData) {
+    const startIndex = (currentPage - 1) * itemsPerPage;
+    const endIndex = startIndex + itemsPerPage;
+    const paginatedProjects = projectsData.slice(startIndex, endIndex);
+
     projectList.innerHTML = '';
-    projectsData.forEach(project => {
+    paginatedProjects.forEach(project => {
       const card = document.createElement('div');
       card.classList.add('project-card');
       card.innerHTML = `
@@ -61,6 +69,8 @@ document.addEventListener('DOMContentLoaded', function() {
       `;
       projectList.appendChild(card);
     });
+
+    updatePaginationInfo(projectsData.length);
   }
 
   // Function to update pagination information (current page, total pages)
@@ -68,38 +78,42 @@ document.addEventListener('DOMContentLoaded', function() {
     const totalPages = Math.ceil(totalProjectsCount / itemsPerPage);
     totalPagesSpan.textContent = totalPages;
     currentPageSpan.textContent = currentPage;
+
+    // Disable/enable pagination buttons based on current page
+    prevPageBtn.disabled = currentPage === 1;
+    nextPageBtn.disabled = currentPage === totalPages || totalPages === 0;
   }
 
-  // Event listener for filter button click
-  filterBtn.addEventListener('click', () => {
-    currentPage = 1; // Reset to first page when filter changes
-    displayProjects();
+  // Event listener for category select change
+  categorySelect.addEventListener('change', () => {
+    currentPage = 1; // Reset to first page when category changes
+    updateProjects();
   });
 
   // Event listener for items per page change
   itemsPerPageSelect.addEventListener('change', () => {
     itemsPerPage = parseInt(itemsPerPageSelect.value);
     currentPage = 1; // Reset to first page when items per page changes
-    displayProjects();
+    updateProjects();
   });
 
   // Event listener for previous page button click
-  document.getElementById('prevPage').addEventListener('click', () => {
+  prevPageBtn.addEventListener('click', () => {
     if (currentPage > 1) {
       currentPage--;
-      displayProjects();
+      updateProjects();
     }
   });
 
   // Event listener for next page button click
-  document.getElementById('nextPage').addEventListener('click', () => {
+  nextPageBtn.addEventListener('click', () => {
     const selectedCategory = categorySelect.value;
-    const projectsToDisplay = selectedCategory === 'all' ? getAllProjects() : projects[selectedCategory];
+    const projectsToDisplay = getProjectsByCategory(selectedCategory);
     const totalPages = Math.ceil(projectsToDisplay.length / itemsPerPage);
 
     if (currentPage < totalPages) {
       currentPage++;
-      displayProjects();
+      updateProjects();
     }
   });
 
